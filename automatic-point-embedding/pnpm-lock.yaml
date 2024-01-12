@@ -4,6 +4,7 @@ specifiers:
   '@babel/core': ^7.23.7
   '@babel/generator': ^7.23.6
   '@babel/helper-module-imports': ^7.22.15
+  '@babel/helper-plugin-utils': ^7.20.2
   '@babel/parser': ^7.23.6
   '@babel/template': ^7.22.15
   '@babel/traverse': ^7.23.7
@@ -13,6 +14,7 @@ devDependencies:
   '@babel/core': 7.23.7
   '@babel/generator': 7.23.6
   '@babel/helper-module-imports': 7.22.15
+  '@babel/helper-plugin-utils': 7.20.2
   '@babel/parser': 7.23.6
   '@babel/template': 7.22.15
   '@babel/traverse': 7.23.7
@@ -124,6 +126,11 @@ packages:
       '@babel/helper-simple-access': 7.22.5
       '@babel/helper-split-export-declaration': 7.22.6
       '@babel/helper-validator-identifier': 7.22.20
+    dev: true
+
+  /@babel/helper-plugin-utils/7.20.2:
+    resolution: {integrity: sha512-8RvlJG2mj4huQ4pZ+rU9lqKi9ZKiRmuvGuM2HlWmkmgOhbs6zEAw6IEiJ5cQqGbDzGZOhwuOQNtZMi/ENLjZoQ==}
+    engines: {node: '>=6.9.0'}
     dev: true
 
   /@babel/helper-simple-access/7.22.5:
