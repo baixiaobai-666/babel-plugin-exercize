@@ -13,7 +13,7 @@ module.exports = declare((api, options, dirname) => {
                     path.traverse({
                         ImportDeclaration (curPath) {
                             const requirePath = curPath.get('source').node.value;
-                            if (requirePath === 'tracker') {
+                            if (requirePath === options.trackerPath) {
                                 const specifierPath = curPath.get('specifiers.0');
                                 if (specifierPath.isImportSpecifier()) {
                                     state.trackerImportId = specifierPath.toString();
@@ -28,7 +28,7 @@ module.exports = declare((api, options, dirname) => {
                         state.trackerImportId = importModule.addDefault(path, 'tracker', {
                             minHint: path.scope.generateUid('tracker')
                         }).name
-                        state.trackerAst = template.statement(`${state.trackerImportId}()`)();
+                        state.trackerAst = api.template.statement(`${state.trackerImportId}()`)();
                     } 
                 }
             },
@@ -37,7 +37,7 @@ module.exports = declare((api, options, dirname) => {
                 if (body.isBlockStatement) {
                     body.node.body.unshift(state.trackerAst);
                 } else {
-                    const ast = template.statement(`{${state.trackerImportId}();return PREV_BODY;}`)({PREV_BODY: bodyPath.node});
+                    const ast = api.template.statement(`{${state.trackerImportId}();return PREV_BODY;}`)({PREV_BODY: bodyPath.node});
                     bodyPath.replaceWith(ast);
                 }
             }
