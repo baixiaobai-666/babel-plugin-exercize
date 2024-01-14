@@ -1,7 +1,7 @@
 const parser = require("@babel/parser");
 // 导出为 es module 导出，通过 commonjs 的方式引入的时候有时候需要取 default
 const traverse = require("@babel/traverse").default;
-const generate = require("@babel/generator").default;
+const generator = require("@babel/generator").default;
 const types = require("@babel/types");
 
 const sourceCode = `
@@ -37,5 +37,5 @@ traverse(ast, {
     }
 });
 
-const { code, map } = generate(ast);
+const { code, map } = generator(ast);
 console.log(code);

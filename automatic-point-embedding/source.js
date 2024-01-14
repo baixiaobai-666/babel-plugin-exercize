@@ -21,3 +21,5 @@ const c = () => {
 const d = function () {
     console.log('ddd');
 };
+
+const e = () => 1

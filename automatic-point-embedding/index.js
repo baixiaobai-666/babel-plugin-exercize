@@ -34,11 +34,11 @@ module.exports = declare((api, options, dirname) => {
             },
             'ClassMethod|ArrowFunctionExpression|FunctionExpression|FunctionDeclaration': (path, state) => {
                 const body = path.get('body')
-                if (body.isBlockStatement) {
-                    body.node.body.unshift(state.trackerAst);
+                if (body && body?.isBlockStatement()) {
+                    body.node.body?.unshift(state.trackerAst);
                 } else {
-                    const ast = api.template.statement(`{${state.trackerImportId}();return PREV_BODY;}`)({PREV_BODY: bodyPath.node});
-                    bodyPath.replaceWith(ast);
+                    const ast = api.template.statement(`{${state.trackerImportId}();return PREV_BODY;}`)({PREV_BODY: body.node});
+                    body.replaceWith(ast);
                 }
             }
         }

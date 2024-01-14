@@ -5,6 +5,47 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "automatic-point-embedding-index",
+      "cwd": "${workspaceFolder}/automatic-point-embedding",
+      "program": "test.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
+      "name": "test-insert-console-babel",
+      "cwd": "${workspaceFolder}/insert-console-babel",
+      "program": "test.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
+      "name": "main-insert-console-babel",
+      "cwd": "${workspaceFolder}/insert-console-babel",
+      "program": "main.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
+      "name": "insert-console-babel",
+      "cwd": "${workspaceFolder}/insert-console-babel",
+      "program": "index.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+
+    {
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
