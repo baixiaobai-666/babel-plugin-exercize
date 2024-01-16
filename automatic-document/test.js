@@ -10,7 +10,7 @@ const source = fs.readFileSync(path.join(__dirname, "./source.ts"), {
 
 const ast = parser.parse(source, {
     sourceType: "unambiguous",
-    plugins: ["typescript"],
+    plugins: ['typescript']
 });
 
 const { code } = transformFromAstSync(ast, source, {
