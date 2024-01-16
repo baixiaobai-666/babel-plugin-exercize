@@ -2,6 +2,7 @@ const { declare } = require('@babel/helper-plugin-utils');
 const doctrine = require('doctrine');
 // const generate = require('@babel/generator').default;
 const fse = require('fs-extra');
+const path = require('path');
 const renderer = require('./renderer');
 
 
@@ -75,7 +76,53 @@ module.exports = declare((api, options) => {
                 state.file.set('docs', docs)
             },
             ClassDeclaration(path, state) {
-
+                const docs = state.file.get('docs');
+                const info = {
+                    type: 'class',
+                    name: path.get('id').toString(),
+                    constructorInfo: {},
+                    methodsInfo: [],
+                    propertiesInfo: [],
+                    doc: path.node.leadingComments && parseComment(path.node.leadingComments[0].value)
+                };
+                path.traverse({
+                    ClassProperty(path) {
+                        info.propertiesInfo.push({
+                            name: path.get('key').toString(),
+                            type: resolveType(path.getTypeAnnotation()),
+                            doc: [path.node.leadingComments, path.node.trailingComments].filter(Boolean).map(v => {
+                                return parseComment(v.value)
+                            }).filter(Boolean)
+                        })
+                    },
+                    ClassMethod(path) {
+                        if (path.get('kind') === 'constructor') {
+                            info.constructorInfo = {
+                                params: path.get('params').map(v =>{
+                                    return {
+                                        name: v.toString(),
+                                        type: resolveType(v.getTypeAnnotation()),
+                                        doc: path.node.leadingComments && parseComment(path.node.leadingComments[0].value)
+                                    }
+                                })
+                            }
+                        } else {
+                            info.methodsInfo.push({
+                                name: path.get('key').toString(),
+                                doc: parseComment(path.node.leadingComments[0].value),
+                                params: path.get('params').map(paramPath=> {
+                                    return {
+                                        name: paramPath.toString(),
+                                        type: resolveType(paramPath.getTypeAnnotation())
+                                    }
+                                }),
+                                return: resolveType(path.getTypeAnnotation())
+                            })
+                        }
+                    }
+                })
+                docs.push(info);
+                state.file.set('docs', docs)
             }
         },
         post(file) {
