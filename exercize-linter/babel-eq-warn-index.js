@@ -19,8 +19,11 @@ const ast = parser.parse(source, {
     sourceType: 'unambiguous' 
 });
 
-const { code } = transformFromAstAsync(ast, code, {
-    plugins: [Linter]
+const { code } = transformFromAstAsync(ast, source, {
+    plugins: [[Linter, {
+        fix: true
+    }]],
+    comments: true
 });
 
 console.log(code);
