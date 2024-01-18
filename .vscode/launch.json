@@ -5,14 +5,64 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "automatic-point-embedding-index",
+      "name": "babel-eq-warn-index",
+      "cwd": "${workspaceFolder}/exercize-linter",
+      "program": "babel-eq-warn.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node",
+      "presentation": {
+        "hidden": false,
+        "group": "linter",
+        "order": 1
+      }
+    },
+    {
+      "name": "babel-for-error-index",
+      "cwd": "${workspaceFolder}/exercize-linter",
+      "program": "babel-for-error-index.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node",
+      "presentation": {
+        "hidden": false,
+        "group": "linter",
+        "order": 1
+      }
+    },
+    {
+      "type": "node",
+      "name": "automatic-document",
+      "request": "launch",
+      "presentation":{
+        "hidden": false,
+        "group": "automatic",
+        "order": 1
+      },
+      "cwd": "${workspaceFolder}/automatic-document",
+      "program": "test.js",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+    },
+    {
+      "name": "automatic-point",
       "cwd": "${workspaceFolder}/automatic-point-embedding",
       "program": "test.js",
       "request": "launch",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "type": "node"
+      "type": "node",
+      "presentation":{
+        "hidden": false,
+        "group": "automatic",
+        "order": 2
+      },
     },
     {
       "name": "test-insert-console-babel",
